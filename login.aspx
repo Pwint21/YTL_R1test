@@ -1,115 +1,182 @@
-<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="login.aspx.vb" Inherits="YTL_R1test.login" %>
+<%@ Page Language="VB" AutoEventWireup="false" EnableEventValidation="false"
+    Inherits="YTLWebApplication.AVLS.Login" Codebehind="Login.aspx.vb" %>
 
-<!DOCTYPE html>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>YTL Login</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+<head>
+    <title>YTL - AVLS</title>
+    <meta name="keywords" content="vehicle tracking, vehicle tracking system, GPS tracking, GPS vehicle tracking, GPS tracking system, automatic vehicle location, tracking system,automatic vehicle locating system, AVLS, GSM GPRS tracking" />
+    <meta name="description" content="AVLS is a low cost, features rich versatile system. It utilize both GPS & GSM technologies to track your vehicle at any time and any place via web based." />
+    
+    <script type="text/javascript">
+        function getWindowWidth() { if (window.self && self.innerWidth) { return self.innerWidth; } if (document.documentElement && document.documentElement.clientWidth) { return document.documentElement.clientWidth; } return document.documentElement.offsetWidth; }
+        function getWindowHeight() { if (window.self && self.innerHeight) { return self.innerHeight; } if (document.documentElement && document.documentElement.clientHeight) { return document.documentElement.clientHeight; } return document.documentElement.offsetHeight; }
+        function mysubmit() { if (document.getElementById("uname").value == "") { alert("Please enter user name"); return false; } else if (document.getElementById("password").value == "") { alert("Please enter password"); return false; } else { document.getElementById("w").value = getWindowWidth(); document.getElementById("h").value = getWindowHeight(); return true; } }
+    </script>
+    <%  If foc <> "" Then%>
+    <script type="text/javascript" language="javascript">
+        if (window.parent.frames.length > 0) { window.parent.location = "login.aspx"; }
+    </script>
+    <%  End If%>
+    <style type="text/css">
+        body
+        {
+            font-size: 11px;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
         }
-        .login-container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-        .login-header {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #333;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
+        .style2
+        {
+            font-size: 11px;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
             font-weight: bold;
         }
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            box-sizing: border-box;
+        .style4
+        {
+            color: #4E6ABD;
         }
-        .form-group input:focus {
-            outline: none;
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0,123,255,0.3);
+        .style5
+        {
+            color: #666666;
         }
-        .btn-login {
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+        .style7
+        {
+            color: #4A6DBE;
         }
-        .btn-login:hover {
-            background-color: #0056b3;
+        .style9
+        {
+            font-size: 10px;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            color: #666666;
         }
-        .error-message {
-            color: #dc3545;
-            margin-top: 10px;
-            text-align: center;
-            font-size: 14px;
-        }
-        .security-notice {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-left: 4px solid #007bff;
-            font-size: 12px;
-            color: #666;
+        .style10
+        {
+            color: #5270C8;
         }
     </style>
 </head>
-<body>
-    <form id="form1" runat="server">
-        <div class="login-container">
-            <div class="login-header">
-                <h2>YTL System Login</h2>
-                <p>Please enter your credentials to access the system</p>
-            </div>
-            
-            <div class="form-group">
-                <label for="txtUsername">Username:</label>
-                <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" MaxLength="50" />
-            </div>
-            
-            <div class="form-group">
-                <label for="txtPassword">Password:</label>
-                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control" MaxLength="100" />
-            </div>
-            
-            <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="btn-login" OnClick="btnLogin_Click" />
-            
-            <asp:Label ID="lblError" runat="server" CssClass="error-message" />
-            
-            <div class="security-notice">
-                <strong>Security Notice:</strong> This system is for authorized users only. 
-                All activities are logged and monitored.
-            </div>
-        </div>
+<body style="margin: 0px;" background="images/blurred-bg-1.jpg">
+    <form id="loginform" runat="server" defaultbutton="ImageButton1">
+    <center>
+        <table width="100%" style="vertical-align: middle;">
+           
+            <tr align="center">
+                <td>
+                    <table >  <%--background="images/lafargeloginpage.jpg"--%>
+                        <tr align="center">
+                            <td>
+                                <img src="images/ytl-logo.png" style="width:495px"/>                  
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td>
+                                <table style=" position: relative;">
+                                        <tr>
+                                            <td>Username</td><td>
+                                        <input id="uname" runat="server" type="text" style="width: 150px;" tabindex="1" title="Name of the user" />
+                                    </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Password</td><td>
+                                        <input id="password" runat="server" type="password" style="width: 150px;" tabindex="2"
+                                            title="Password of the user" />
+                                    </td>
+                                        </tr>
+                                    </table>
+                                <div style=" position: relative;">
+                                        <table>
+                                            <tr>
+                                                <td style="width: 80px; height: 65px;">
+                                                    &nbsp;
+                                                </td>
+                                                <td>
+                                                    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="images/glogin_13.jpg"
+                                                        Width="69" Height="44" TabIndex="3" />
+                                                </td>
+                                                <td>
+                                                    <input type="reset" title="Cancel" style="border: solid 0px white; background-image: url(images/glogin_14.jpg);
+                                                        cursor: pointer; width: 65px; height: 44px;" tabindex="4" value="" onclick="document.loginform.reset()" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                <%--<div style="width: 495px; height: 394px; left: 0px; top: 0px; text-align: left;">
+                                    
+                                    
+                                    
+                                    
+                                </div>--%>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <div class="style2">
+                        <span class="style4">24 Hour</span> <span class="style5">Help Line Center :</span>
+                        <span class="style7">+60 3625 79472</span> <span class="style5">/ <a href="mailto:info@g1.com.my">
+                            info@g1.com.my</a></span></div>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <div class="style2">
+                        <span class="style5">Tel :</span> <span class="style7">+60 3625 70509</span> 
+                    </div>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <div>
+                        <span class="style7">.......................................................................................................................</span>
+                    </div>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <p class="style9">
+                        <strong>www.g1.com.my</strong><br />
+                        Copyright &copy; 2013 <span class="style10">Global Telematics Sdn Bhd</span>. All
+                        rights reserved<br />
+                        Powered by Integra &reg;<br />
+                        Best viewed with Chrome/Firefox at 1366x768 resolution.</p>
+                </td>
+            </tr>
+        </table>
+    </center>
+    <input type="hidden" name="txtError" value="" />
+    <input type="hidden" name="txtSetFocus" value="" />
+    <input type="hidden" name="txtStatus" value="False" />&nbsp;<br />
+    <input name="w" id="w" type="hidden" value="" />
+    <input name="h" id="h" type="hidden" value="" />
+    <input name="lat" id="lat" type="hidden" value="" />
+    <input name="lon" id="lon" type="hidden" value="" />
+    <input name="acc" id="acc" type="hidden" value="" />
     </form>
+    
 </body>
+<script type="text/javascript" language="javascript">
+    document.getElementById("uname").focus();
+    getLocation();
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+    }
+    function showPosition(position) {
+        document.getElementById("lat").value = position.coords.latitude;
+        document.getElementById("lon").value = position.coords.longitude;
+        document.getElementById("acc").value = position.coords.accuracy;
+    }  
+</script>
+<%  If foc <> "" Then%>
+<script type="text/javascript" language="javascript">
+    var id = "<%=foc%>"; document.getElementById(id).focus(); document.getElementById(id).select(); 
+</script>
+<%  End If%>
+<%  If errormessage <> "" Then%>
+<script type="text/javascript" language="javascript">
+    alert('<%= errormessage %>');
+</script>
+<%  End If%>
 </html>
