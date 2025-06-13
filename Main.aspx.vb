@@ -137,8 +137,8 @@ Partial Class Main
             End If
 
             ' Remove potentially dangerous characters
-            Dim sanitized As String = Regex.Replace(input, "[<>\"'%;()&+\-\*/=]", "")
-            
+            Dim sanitized As String = Regex.Replace(input, "[<>""'%;()&+\-*/=]", "")
+
             ' Limit length
             If sanitized.Length > 50 Then
                 sanitized = sanitized.Substring(0, 50)
